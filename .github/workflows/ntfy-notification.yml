@@ -22,12 +22,8 @@ jobs:
 
       - name: Send notification to NTFY
         run: |
-          curl -H "Authorization: Bearer ${{ secrets.NTFY_TOKEN }}" \
-               -H "X-Title: 🚀 New push to ${{ steps.commit.outputs.branch }}" \
-               -H "X-Tags: github,git" \
-               -H "X-Priority: high" \
-               -H "Content-Type: text/markdown" \
-               -d "# New Code Push 🚀
+          MSG=$(cat <<EOF
+# New Code Push 🚀
 
 ## Repository
 \`${{ steps.commit.outputs.repo }}\`
@@ -38,5 +34,15 @@ jobs:
 ## Commit Message
 \`\`\`
 ${{ steps.commit.outputs.message }}
-\`\`\`" \
-               http://${{ secrets.NTFY_SERVER }}/${{ secrets.NTFY_TOPIC }}
+\`\`\`
+EOF
+    )
+
+    curl -H "Authorization: Bearer ${{ secrets.NTFY_TOKEN }}" \
+         -H "X-Title: 🚀 New push to ${{ steps.commit.outputs.branch }}" \
+         -H "X-Tags: github,git" \
+         -H "X-Priority: high" \
+         -H "Content-Type: text/markdown" \
+         -d "$MSG" \
+         http://${{ secrets.NTFY_SERVER }}/${{ secrets.NTFY_TOPIC }}
+
