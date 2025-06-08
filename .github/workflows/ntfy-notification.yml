@@ -27,13 +27,16 @@ jobs:
                -H "X-Tags: github,git" \
                -H "X-Priority: high" \
                -H "Content-Type: text/markdown" \
-               -d $'# New Code Push 🚀\n\n\
-## Repository\n\
-`${{ steps.commit.outputs.repo }}`\n\n\
-## Branch\n\
-`${{ steps.commit.outputs.branch }}`\n\n\
-## Commit Message\n\
-```\n\
-${{ steps.commit.outputs.message }}\n\
-```' \
+               -d "# New Code Push 🚀
+
+## Repository
+\`${{ steps.commit.outputs.repo }}\`
+
+## Branch
+\`${{ steps.commit.outputs.branch }}\`
+
+## Commit Message
+\`\`\`
+${{ steps.commit.outputs.message }}
+\`\`\`" \
                http://${{ secrets.NTFY_SERVER }}/${{ secrets.NTFY_TOPIC }}
