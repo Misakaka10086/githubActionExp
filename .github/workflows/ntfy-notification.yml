@@ -18,7 +18,6 @@ jobs:
       - name: Send notification to NTFY
         run: |
           curl -H "Authorization: Bearer ${{ secrets.NTFY_TOKEN }}" \
-               -H "Content-Type: text/markdown" \
                -H "X-Title: 🚀 New push to ${{ steps.commit.outputs.branch }}" \
                -H "X-Tags: github,git" \
                -H "X-Priority: high" \
