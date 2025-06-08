@@ -1,0 +1,17 @@
+name: NTFY Notification
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send notification to NTFY
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.NTFY_TOKEN }}" \
+               -H "Content-Type: application/json" \
+               -d '{"message": "New code has been pushed to main branch"}' \
+               http://${{ secrets.NTFY_SERVER }}:${{ secrets.NTFY_PORT }}/${{ secrets.NTFY_TOPIC }} 
