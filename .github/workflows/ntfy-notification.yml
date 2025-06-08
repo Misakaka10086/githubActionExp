@@ -22,21 +22,25 @@ jobs:
 
       - name: Send notification to NTFY
         run: |
+          REPO="${{ steps.commit.outputs.repo }}"
+          BRANCH="${{ steps.commit.outputs.branch }}"
+          MESSAGE="${{ steps.commit.outputs.message }}"
+
           MSG=$(cat <<EOF
 # New Code Push 🚀
 
 ## Repository
-`${{ steps.commit.outputs.repo }}`
+\`$REPO\`
 
 ## Branch
-`${{ steps.commit.outputs.branch }}`
+\`$BRANCH\`
 
 ## Commit Message
 \`\`\`
-${{ steps.commit.outputs.message }}
+$MESSAGE
 \`\`\`
 EOF
-    )
+          )
 
           curl -H "Authorization: Bearer ${{ secrets.NTFY_TOKEN }}" \
                -H "X-Title: 🚀 New push to ${{ steps.commit.outputs.branch }}" \
