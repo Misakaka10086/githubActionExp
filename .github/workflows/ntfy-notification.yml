@@ -28,10 +28,10 @@ jobs:
                -H "X-Priority: high" \
                -H "Content-Type: text/markdown" \
                -d $'# New Code Push 🚀\n\n'\
-'## Repository\n'\
-'`${{ steps.commit.outputs.repo }}`\n\n'\
-'## Branch\n'\
-'`${{ steps.commit.outputs.branch }}`\n\n'\
-'## Commit Message\n'\
-'${{ steps.commit.outputs.message }}\n' \
+                  '## Repository\n'\
+                  '`${{ steps.commit.outputs.repo }}`\n\n'\
+                  '## Branch\n'\
+                  '`${{ steps.commit.outputs.branch }}`\n\n'\
+                  '## Commit Message\n'\
+                  '${{ steps.commit.outputs.message }}\n' \
                http://${{ secrets.NTFY_SERVER }}/${{ secrets.NTFY_TOPIC }}
