@@ -35,8 +35,7 @@ jobs:
             \`\`\`
             ${{ steps.commit.outputs.message }}
             \`\`\`
-            EOF
-          )
+            EOF)
 
           curl -H "Authorization: Bearer ${{ secrets.NTFY_TOKEN }}" \
                -H "X-Title: 🚀 New push to ${{ steps.commit.outputs.branch }}" \
