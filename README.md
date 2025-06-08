@@ -11,7 +11,6 @@
 在 GitHub 仓库的 Secrets 中需要配置以下参数：
 
 - `NTFY_SERVER`: ntfy 服务器地址
-- `NTFY_PORT`: ntfy 服务器端口
 - `NTFY_TOPIC`: 通知主题
 - `NTFY_TOKEN`: 验证令牌
 

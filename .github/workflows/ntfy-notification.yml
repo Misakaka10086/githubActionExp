@@ -14,4 +14,4 @@ jobs:
           curl -H "Authorization: Bearer ${{ secrets.NTFY_TOKEN }}" \
                -H "Content-Type: application/json" \
                -d '{"message": "New code has been pushed to main branch"}' \
-               http://${{ secrets.NTFY_SERVER }}:${{ secrets.NTFY_PORT }}/${{ secrets.NTFY_TOPIC }} 
+               http://${{ secrets.NTFY_SERVER }}/${{ secrets.NTFY_TOPIC }} 
