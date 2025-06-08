@@ -9,9 +9,20 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
+      - name: Get commit info
+        id: commit
+        run: |
+          echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+          echo "message=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
+      
       - name: Send notification to NTFY
         run: |
           curl -H "Authorization: Bearer ${{ secrets.NTFY_TOKEN }}" \
                -H "Content-Type: application/json" \
-               -d '{"message": "New code has been pushed to main branch"}' \
+               -H "X-Title: 🚀 New push to ${{ steps.commit.outputs.branch }}" \
+               -H "X-Tags: github,git" \
+               -d '{
+                 "message": "## Branch: ${{ steps.commit.outputs.branch }}\n\n### Commit Message:\n${{ steps.commit.outputs.message }}",
+                 "markdown": true
+               }' \
                http://${{ secrets.NTFY_SERVER }}/${{ secrets.NTFY_TOPIC }} 
