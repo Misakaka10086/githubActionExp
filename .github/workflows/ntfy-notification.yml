@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
+      
       - name: Get commit info
         id: commit
         run: |
@@ -22,26 +22,6 @@ jobs:
       
       - name: Send notification to NTFY
         run: |
-          REPO="${{ steps.commit.outputs.repo }}"
-          BRANCH="${{ steps.commit.outputs.branch }}"
-          MESSAGE="${{ steps.commit.outputs.message }}"
-
-          MSG=$(cat <<EOF
-# New Code Push 🚀
-
-## Repository
-\`$REPO\`
-
-## Branch
-\`$BRANCH\`
-
-## Commit Message
-\`\`\`
-$MESSAGE
-\`\`\`
-EOF
-          )
-
           curl -H "Authorization: Bearer ${{ secrets.NTFY_TOKEN }}" \
                -H "X-Title: 🚀 New push to ${{ steps.commit.outputs.branch }}" \
                -H "X-Tags: github,git" \
