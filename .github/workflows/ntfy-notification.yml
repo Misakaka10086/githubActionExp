@@ -21,6 +21,8 @@ jobs:
                -H "X-Title: 🚀 New push to ${{ steps.commit.outputs.branch }}" \
                -H "X-Tags: github,git" \
                -H "X-Priority: high" \
-               -H "Markdown: yes" \
-               -d "# New Code Push 🚀\n\n## Branch\n\`${{ steps.commit.outputs.branch }}\`\n\n## Commit Message\n\`\`\`\n${{ steps.commit.outputs.message }}\n\`\`\`" \
-               http://${{ secrets.NTFY_SERVER }}/${{ secrets.NTFY_TOPIC }} 
+              #  -H "Markdown: yes" \
+               -H "Content-Type: text/markdown" 
+               -d $'## 任务提醒\n- [x] 写报告\n- [ ] 参加会议\n\n**请尽快完成。**'
+              #  -d "# New Code Push 🚀\n\n## Branch\n\`${{ steps.commit.outputs.branch }}\`\n\n## Commit Message\n\`\`\`\n${{ steps.commit.outputs.message }}\n\`\`\`" \
+              #  http://${{ secrets.NTFY_SERVER }}/${{ secrets.NTFY_TOPIC }} 
