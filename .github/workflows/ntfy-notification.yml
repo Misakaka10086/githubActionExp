@@ -26,15 +26,15 @@ jobs:
 # New Code Push 🚀
 
 ## Repository
-\`${{ steps.commit.outputs.repo }}\`
+`${{ steps.commit.outputs.repo }}`
 
 ## Branch
-\`${{ steps.commit.outputs.branch }}\`
+`${{ steps.commit.outputs.branch }}`
 
 ## Commit Message
-\`\`\`
+```
 ${{ steps.commit.outputs.message }}
-\`\`\`
+```
 EOF
     )
 
